@@ -28,8 +28,10 @@ ask_pass       = True
 
 [privilege_escalation]
 # Automatically escalate privileges on managed nodes
-become         = True
-become_method  = sudo
-become_user    = root
+become          = True
+become_method   = sudo
+become_user     = root
+become_ask_pass = false
+
 
 ```
