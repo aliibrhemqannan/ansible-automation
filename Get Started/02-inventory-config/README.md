@@ -97,3 +97,25 @@ ansible-playbook site.yml
 ANSIBLE_CONFIG=/tmp/test_ansible.cfg ansible-playbook site.yml
 
 ```
+Here is the clean Markdown formatting for your ad-hoc `ping` commands.
+
+---
+
+### Ansible Ad-Hoc Ping Commands
+
+The `ping` module is used to verify our ability to login to managed nodes and confirm a usable Python interpreter is available on them. It does not send an ICMP ping; instead, it tests the SSH connection and Ansible usability.
+
+```bash
+# 1. Ping a specific host or group defined in your inventory
+ansible -m ping <host>
+
+# 2. Ping ALL hosts defined in your inventory file
+ansible -m ping all
+
+```
+
+#### Command Breakdown:
+
+* `-m ping`: Specifies that you want to use the **ping module**.
+* `<host>`: The specific hostname, IP address, or group name from your inventory file.
+* `all`: A built-in Ansible keyword that targets every host listed in your active inventory.
