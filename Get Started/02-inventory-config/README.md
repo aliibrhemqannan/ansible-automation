@@ -1,6 +1,4 @@
-Here is a clean, corrected Markdown template for your Ansible configuration and commands.
 
-I made a few quick syntax corrections to your draft to make sure Ansible reads it properly (for example, changing `[default]` to `[defaults]`, organizing the privilege escalation settings into their own block, and fixing lowercase typos like `become_method`).
 
 ---
 
@@ -33,5 +31,65 @@ become_method   = sudo
 become_user     = root
 become_ask_pass = false
 
+
+```
+Here is the structured guide explaining the `ansible-config` command options, how the `ANSIBLE_CONFIG` environment variable works, and how Ansible searches for configuration files.
+
+---
+
+## 1. The `ansible-config` Command Usage
+
+The `ansible-config` CLI utility allows you to view, generate, and troubleshoot your Ansible configurations.
+
+```bash
+# 1. View all active configuration settings and where they are loaded from
+ansible-config view
+
+# 2. Dump all configuration settings, highlighting what has been changed from defaults
+ansible-config dump
+
+# 3. Dump ONLY the configuration settings that differ from the built-in defaults
+ansible-config dump --only-changed
+
+# 4. Initialize a fully commented out template of all available config options
+ansible-config init --disabled > ansible.cfg
+
+# 5. List all available configuration options, their defaults, and environment variables
+ansible-config list
+
+```
+
+---
+
+## 2. Ansible Configuration File Search Order (Precedence)
+
+When you run an Ansible command, it searches for a configuration file in a strict **priority order**.
+
+> ⚠️ **The "First Match Wins" Rule:** Ansible does **not** merge configuration files. It stops searching as soon as it finds a valid file and completely ignores any configurations located further down the list.
+
+### The Priority Hierarchy (Highest to Lowest)
+
+| Priority | Location | Description / Use Case |
+| --- | --- | --- |
+| **1 (Highest)** | `ANSIBLE_CONFIG` | An environment variable pointing directly to a specific config file. |
+| **2** | `./ansible.cfg` | An `ansible.cfg` file located in your current project/working directory. |
+| **3** | `~/.ansible.cfg` | A user-specific configuration file located in the user's home directory. |
+| **4 (Lowest)** | `/etc/ansible/ansible.cfg` | The system-wide default configuration file. |
+
+---
+
+## 3. Deep Dive: `ANSIBLE_CONFIG` Environment Variable
+
+The `ANSIBLE_CONFIG` environment variable allows you to temporarily override all file-lookup paths and force Ansible to use a configuration file of your choice. This is ideal for testing, multi-environment setups, or CI/CD pipelines.
+
+### How to use it in your shell:
+
+```bash
+# Option A: Export it for the entire terminal session
+export ANSIBLE_CONFIG=/path/to/your/custom_ansible.cfg
+ansible-playbook site.yml
+
+# Option B: Run it inline for a single command (recommended for quick tests)
+ANSIBLE_CONFIG=/tmp/test_ansible.cfg ansible-playbook site.yml
 
 ```
