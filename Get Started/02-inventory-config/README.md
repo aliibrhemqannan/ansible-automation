@@ -42,6 +42,10 @@ Here is the structured guide explaining the `ansible-config` command options, ho
 The `ansible-config` CLI utility allows you to view, generate, and troubleshoot your Ansible configurations.
 
 ```bash
+#  to show default config file ansible use.
+ansible  all -i inventory --list-hosts -v 
+```
+```bash
 # 1. View all active configuration settings and where they are loaded from
 ansible-config view
 
