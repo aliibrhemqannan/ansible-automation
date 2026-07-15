@@ -42,6 +42,13 @@ ansible manage-node-1 -m file -a "path=/home/admin/myself state=touch"
 
 ```
 
+To access the host via ip 
+
+```sh
+ansible 50.0.6.1 -m yum -a 'name=httpd state=latest'
+
+```
+
 To controle service at all nodes 
 ```sh
 ansible all -m service -a 'name=httpd  state= restarted'
