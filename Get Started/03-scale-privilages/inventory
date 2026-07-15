@@ -1,2 +1,5 @@
+[default]
 manage-node-1
+
+[prod]
 manage-node-2
