@@ -1,0 +1,6 @@
+[defaults]
+manage-node-1
+
+
+[production]
+manage-node-2
