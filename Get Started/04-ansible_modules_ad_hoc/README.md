@@ -42,4 +42,9 @@ ansible manage-node-1 -m file -a "path=/home/admin/myself state=touch"
 
 ```
 
+To controle service at all nodes 
+```sh
+ansible all -m service -a 'name=httpd  state= restarted'
+```
+
 > 💡 **Note on quotes:** Always use standard double quotes `"..."` or single quotes `'...'` around your arguments in the terminal to avoid shell parsing issues. Do not use backticks ``...``.
