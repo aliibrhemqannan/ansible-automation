@@ -119,3 +119,28 @@ ansible -m ping all
 * `-m ping`: Specifies that you want to use the **ping module**.
 * `<host>`: The specific hostname, IP address, or group name from your inventory file.
 * `all`: A built-in Ansible keyword that targets every host listed in your active inventory.
+
+
+Here is the clean Markdown formatting for setting up passwordless SSH authentication. This is the best practice for Ansible, as it allows you to run your playbooks seamlessly without being prompted for a password every time.
+
+---
+
+### Setting Up Passwordless SSH Authentication
+
+Before Ansible can manage your remote nodes efficiently, you should configure SSH key-based authentication.
+
+```bash
+# Step 1: Log in with a password to verify the initial connection
+ssh <user-name>@<host>
+
+# Step 2: Copy your public SSH key to the remote host
+ssh-copy-id <user-name>@<host>
+
+# Step 3: Log in again (this time, it should NOT prompt you for a password)
+ssh <user-name>@<host>
+
+```
+
+#### Why do this for Ansible?
+
+Once your SSH key is copied to the host, you can remove `ask_pass = True` from your `ansible.cfg`. Ansible will then connect automatically using your SSH keys, making your automation completely hands-free and much faster.
